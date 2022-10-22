@@ -1,75 +1,93 @@
-1в. В качестве средства виртуализации использую QEMU-KVM и инструмент для управления виртуализацией libvirt.
+Домашнее задание к занятию "3.3. Операционные системы. Лекция 1"
 
-4в. Конфигурационный файл для запуска centos 7 посредством vagrant выглядит следующим образом:
-	
-    	ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
 
-		Vagrant.configure("2") do |config|
+1. В нашем случае системный вызов команды cd будет chdir("/tmp")
 
-  			##### DEFINE VM #####
-  			config.vm.define "cent-7" do |config|
-  			config.vm.hostname = "cent-7"
-  			config.vm.box = "centos/7"
- 			config.vm.box_check_update = false
-  			config.vm.provider :libvirt do |v|
-    				v.memory = 1024
-    				v.cpus = 2
-    				end
-  			end
-		end
-5в. По умолчанию выбо выделено CPU: 1, RAM 512MB , SWAP 2GB.
-6в. Расширение ресурсов возможно посредством добавления следующих строк в конфигурационный файл:
-	
-        v.memory = 1024
-    	v.cpus = 2
-8в. 
-			
-		HISTFILESIZE
-   		строка 470
-  
-   ignoreboth это сокращение для 2х директив ignorespace and ignoredups
-   ignorespace - не сохранять команды начинающиеся с пробела, 
-   ignoredups - не сохранять команду, если такая уже имеется в истории
-   
-9в. {} - подстановка переменной из списка. Конструкция mkdir ./dir_{1..10} - создаст каталоги сименами dir_1, dir_2 и т.д. до dir_10	
-    строка 174
-    
-10в. 
-	
-		touch {000001..100000}.txt
-    	300000 файлов создать не удасться (ошибка -bash: /usr/bin/touch: Argument list too long)
-    
-11в. [[]] - проверка условия.  [[ -d /tmp ]] проверяет наличие каталога. Возвращает 0 или 1.
-	Доработка ответа:
-	конструкция [[ -d /tmp ]] возвращает 0 или 1 в зависимости от выражения внутри. В данном случае вернется Истина, т.к. каталог существует. Проверку 	   в терминалепроводил следующим образом. Как видно статус выполнения конструкции [[ -d /tmp ]] 0, каталог существует. Во втором примере попытался 	   выполнить проверку условия с несуществующим каталогом tmr, статус выполения команды 1, каталога нет.
-	
-	[root@cent-7 /]# [[ -d /tmp ]]
-	[root@cent-7 /]# echo ${?}
-	0
-	[root@cent-7 /]# [[ -d /tmr ]]
-	[root@cent-7 /]# echo ${?}
-	1
-	
+2. Файл базы типов /usr/share/misc/magic.mgc
+```
+		openat(AT_FDCWD, "/usr/share/misc/magic.mgc", O_RDONLY) = 3
+```
+		Так же, по всей видимости ищет и пользовательские файлы:
+```
+		stat("/home/telecor/.magic.mgc", 0x7ffd6f6ac520) = -1 ENOENT (No such file or directory)
+		stat("/home/telecor/.magic", 0x7ffd6f6ac520) = -1 ENOENT (No such file or directory)
+		openat(AT_FDCWD, "/etc/magic.mgc", O_RDONLY) = -1 ENOENT (No such file or directory)
+		stat("/etc/magic", {st_mode=S_IFREG|0644, st_size=111, ...}) = 0
+		openat(AT_FDCWD, "/etc/magic", O_RDONLY) = 3
+```
 
-12в. на вм с ОС Centos7 получилось реализовать только следующий вывод:
-       		
-		[vagrant@cent-7 tmp]$ type -a bash
-		bash is /tmp/new_path_dir/bash
-		bash is /usr/bin/bash
-    
-    на тестовой вм с ОС Ubuntu 20.04 все получилось реализовать как и требовалось в задании:
+3. 
+```
+    root@netboxtest:/home/telecor# lsof -p 39225 | grep 123
+    vi     39273 telecor    4u   REG  253,0    12288   4199 /home/telecor/.123.txt.swp (deleted)
+
+    echo '' >/proc/39273/fd/4
+
+    где 39273 PID процеса, а 4 это файловый дескриптор
+```
+
+4. "Зомби" процессы, в отличии от "сирот" освобождают свои ресурсы, но не освобождают запись в таблице процессов. 
+	    Запись освободиться при вызове wait() родительским процессом. 
 	
-        	root@test:/home/telecor# mkdir /tmp/new_path_dir
-			root@test:/home/telecor# cp /bin/bash /tmp/new_path_dir/
-			root@test:/home/telecor# type -a bash 
-			bash is /usr/bin/bash
-			bash is /bin/bash
-			root@test:/home/telecor# PATH=/tmp/new_path_dir/:$PATH
-			root@test:/home/telecor# type -a bash 
-			bash is /tmp/new_path_dir/bash
-			bash is /usr/bin/bash
-			bash is /bin/bash
-13в. 
-		
-		at - команда запускается в указанное время (в параметре)
-    		batch - запускается когда уровень загрузки системы снизится ниже 1.5.
+5.    
+```
+    /usr/sbin/opensnoop-bpfcc
+    root@netboxtest:/home/telecor# /usr/sbin/opensnoop-bpfcc
+    PID    COMM               FD ERR PATH
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    739    redis-server       17   0 /proc/739/stat
+    1      systemd            22   0 /proc/638/cgroup
+    739    redis-server       17   0 /proc/739/stat
+```
+6. 
+```
+    Part of the utsname information is also accessible via
+       /proc/sys/kernel/{ostype, hostname, osrelease, version,
+       domainname}.
+```
+7. 
+```
+        && -  условный оператор, 
+        а ;  - разделитель последовательных команд
+
+        то есть в случае с && вторая команда выполниться, только при условии успешного выполнения первой.
+
+        
+        set -e - прерывает сессию при любом ненулевом значении исполняемых команд в конвеере кроме последней.
+        в случае &&  вместе с set -e- вероятно не имеет смысла, так как при ошибке , выполнение команд прекратиться.
+```
+8.   По сути, для сценария , повышает деталезацию вывода ошибок(логирования), 
+	    и завершит сценарий при наличии ошибок, на любом этапе выполнения сценария, кроме последней завершающей команды
+```
+    -e прерывает выполнение исполнения при ошибке любой команды кроме последней в последовательности 
+    -x вывод трейса простых команд 
+    -u неустановленные/не заданные параметры и переменные считаются как ошибки, с выводом в stderr текста ошибки и выполнит завершение неинтерактивного вызова
+    -o pipefail возвращает код возврата набора/последовательности команд, ненулевой при последней команды или 0 для успешного выполнения команд.
+```
+9. Самые частые:
+```
+        S,S+,Ss,Ssl,Ss+ - Процессы ожидающие завершения. 
+        I,I< - фоновые бездействующие процессы ядра
+
+        Доп символы это доп характеритики, например приоритет (<)
+```
+
