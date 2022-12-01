@@ -19,3 +19,38 @@ https://hub.docker.com/repository/docker/nardah/netology_nginx/tags?page=1&order
 - можно использовать Виртуальную машину, т.к. хранилище и  не сказано что высоконагруженное в Контейнере хранить БД с данными не подходит для физического сервера может быть через чур расточительно
 ### 8. Gitlab сервер для реализации CI/CD процессов и приватный (закрытый) Docker Registry.
 - Gitlab сервер на отдельной виртуальной машине, Docker Registry в контейнере. Основываюсь на личном опыте.
+## 3. 
+```
+root@netology:~/data# docker ps
+CONTAINER ID   IMAGE                         COMMAND                  CREATED          STATUS          PORTS                               NAMES
+cfd99a5e8db6   centos:centos7                "/bin/bash"              26 seconds ago   Up 24 seconds                                       centos1
+005994c5e310   debian:stable                 "bash"                   3 minutes ago    Up 3 minutes                                        debian1
+```
+Контейнер Centos:
+```
+root@netology:~/data# docker exec -it cfd99a5e8db6 /bin/bash
+[root@cfd99a5e8db6 /]# cd data/
+[root@cfd99a5e8db6 data]# touch 123.txt
+[root@cfd99a5e8db6 data]# ls
+123.txt
+[root@cfd99a5e8db6 data]# 
+```
+Хост машина:
+```
+root@netology:~/data# touch 1234.txt
+root@netology:~/data# ll
+total 40
+drwxr-xr-x 2 root root  4096 Dec  1 15:08 ./
+drwx------ 6 root root 36864 Dec  1 14:56 ../
+-rw-r--r-- 1 root root     0 Dec  1 15:08 1234.txt
+-rw-r--r-- 1 root root     0 Dec  1 15:07 123.txt
+root@netology:~/data# 
+```
+Контейнер Debian:
+```
+root@netology:~/data# docker exec -it 005994c5e310 /bin/bash
+root@005994c5e310:/# cd data/
+root@005994c5e310:/data# ls
+123.txt  1234.txt
+root@005994c5e310:/data# 
+```
