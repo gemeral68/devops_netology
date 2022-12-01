@@ -33,6 +33,7 @@ vagrant:
     [bulat@bulat-pc ~]$ vagrant -v
     Vagrant 2.3.3
 ```
-  
-	   virtualbox:
-			
+```
+virtualbox:
+```
+![](https://github.com/gemeral68/devops_netology/blob/main/virt-homeworks/05-virt-02-iaac/Screenshot%20from%202022-12-01%2012-41-01.png)	
