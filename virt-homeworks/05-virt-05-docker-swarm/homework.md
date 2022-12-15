@@ -15,5 +15,4 @@
 ![](https://github.com/gemeral68/devops_netology/blob/main/virt-homeworks/05-virt-05-docker-swarm/Screenshot%20from%202022-12-15%2017-55-31.png)
 
 ## 3. Создать ваш первый, готовый к боевой эксплуатации кластер мониторинга, состоящий из стека микросервисов.
-
-   
+![](https://github.com/gemeral68/devops_netology/blob/main/virt-homeworks/05-virt-05-docker-swarm/Screenshot%20from%202022-12-15%2018-36-10.png)
