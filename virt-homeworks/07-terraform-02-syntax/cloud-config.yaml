@@ -1,0 +1,10 @@
+#cloud-config
+ssh_pwauth: no
+users:
+  - name: netology
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSr1nqbjqW7rKYORqgIyPUhWtC65ZpPJO/yx9UmtkhLv0/FlU3Y3JNf0S3ULe8Ys3ek8G8in1BtGaewAapP7GSozviFTWnhhIMrGzNGrX4i/EmtC2B5ipM1plSM3o54MOV900XcPSrGeNkjDwVmWpHWgLvEI/FDX33ZE+4IIlLnKdD4Rc+JRWvBlFHs7oBuv7sXCoZ1Al3Gkzc9cM/kyw1qb9+S74oG+1hzd2kMYKGgyesFNHjo60LN/2rcqnKqz9oStFSmNTItgXWbMN5NpDysa6nRxZgbG2/GYUf1RVuriBCnFgKAMLBNySQSyq0TKmhlrCHnCV9ESCCRO3qqsixcv8XlA5GRXz3m3AGsjJ5qimvo+6JE+hOfFMt6PgE+CKYiUnfav0rLkmKkTSsCdgISI4iDzq4bnwKYF2YirVR8PCHmLCtUoRxhrUSGylLrv52qbdfT+xennTlm+e1fA/fpZLRrMEvx/Ue9N1DWpJA3kFK+wd6K9nfVOpvJOM/Wss= bulat@bulat-pc
+
+
