@@ -1,5 +1,8 @@
 # "Облачные провайдеры и синтаксис Terraform."
 ## Задача 2
+
+#### Если вы выполнили первый пункт, то добейтесь того, что бы команда terraform plan выполнялась без ошибок.
+
 ```sh
 terraform plan
 
@@ -122,4 +125,4 @@ Plan: 3 to add, 0 to change, 0 to destroy.
 
 Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
 ```
-![]()
+![](https://github.com/gemeral68/devops_netology/blob/main/virt-homeworks/07-terraform-02-syntax/1.png)
