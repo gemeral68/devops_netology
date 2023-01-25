@@ -2,7 +2,7 @@
 
 ## Задание 1
 #### Создадим бэкэнд в S3 (необязательно, но крайне желательно).
-![]()
+![](https://github.com/gemeral68/devops_netology/blob/main/virt-homeworks/07-terraform-03-basic/screenshots/1.png)
 
 ## Задание 2
 #### Инициализируем проект и создаем воркспейсы.
