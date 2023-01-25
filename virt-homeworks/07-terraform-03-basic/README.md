@@ -4,6 +4,20 @@
 #### Создадим бэкэнд в S3 (необязательно, но крайне желательно).
 ![](https://github.com/gemeral68/devops_netology/blob/main/virt-homeworks/07-terraform-03-basic/screenshots/1.png)
 
+```tf
+backend "s3" {
+    endpoint   = "storage.yandexcloud.net"
+    bucket     = "netology-1"
+    region     = "ru-central1"
+    key        = "terraform.tfstate"
+    access_key = "*********************"
+    secret_key = "*********************"
+    
+    skip_region_validation      = true
+    skip_credentials_validation = true
+  }
+ ```
+
 ## Задание 2
 #### Инициализируем проект и создаем воркспейсы.
 - Вывод команды terraform workspace list.
@@ -14,7 +28,7 @@
   stage
 ```
 - Вывод команды terraform plan для воркспейса prod.
-```terraform
+```tf
 [root@bulat-pc terraform-config]# terraform plan
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
