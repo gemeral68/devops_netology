@@ -6,6 +6,6 @@ clickhouse:
 
 all:
   vars:
-    ansible_ssh_password: netology
-    ansible_sudo_pass: netology
-    ansible_user: netology
+    ansible_ssh_password: *******
+    ansible_sudo_pass: *******
+    ansible_user: *******
