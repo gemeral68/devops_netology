@@ -1,5 +1,165 @@
+# Clickhouse & Vector
+## Общая структура
+- Playbook состоит из 2х play: 
+   - Install Clickhouse
+   - Install Vector
 
+- Inventory располагается в каталоге /inventory и содержит информацию о хостах, к которым будет применяться playbook.
+  - prod.yml
+    ```yml
+    ---
+    clickhouse:
+      hosts:
+        clickhouse-01:
+          ansible_host: 10.116.100.83
+    
+    all:
+      vars:
+        ansible_ssh_password: *******
+        ansible_sudo_pass: *******
+        ansible_user: *******
+    ```
+- Переменные, используемые в playbook, расположены в каталоге /group_vars, в своем подкаталоге для clickhouse и vector соответственно.
+  - clickhouse.yml
+    ```yml
+    ---
+    clickhouse_version: "23.7.4.5"
+    clickhouse_packages:
+      - clickhouse-client
+      - clickhouse-server
+      - clickhouse-common-static
+    ```
+  - vector.yml
+    ```yml
+    ---
+    vector_url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.x86_64.rpm"
+    vector_version: 0.32.0
+    vector_config_dir: "/etc/vector"
+    vector_config:
+      sources:
+        demo_logs:
+          type: demo_logs
+          format: json
+          interval: 0.1
+      sinks:
+        to_clickhouse:
+          type: clickhouse
+          inputs:
+            - demo_logs
+          database: logs
+          endpoint: 127.0.0.1
+          table: vector_table
+          compression: gzip
+          healthcheck: true
+          skip_unknown_fields: true
+      ```
+- Шаблоны конфигов для vector находятся в /templates.
+  - vector.service.j2
+    ```j2
+    [Unit]
+    Description=Vector
+    Documentation=https://vector.dev
+    After=network-online.target
+    Requires=network-online.target
+    
+    [Service]
+    User={{ ansible_user_id }}
+    Group={{ ansible_user_id }}
+    ExecStart=/usr/bin/vector --config {{ vector_config_dir }}/vector.yml
+    ExecReload=/bin/kill -HUP $MAINPID
+    Restart=always
+    [Install]
+    WantedBy=multi-user.target
+    ```
+  - vector.yml.j2
+    ```j2
+    {{ vector_config | to_nice_yaml }}
+    ```
+## Описание работы 
+#### Оба play, в первом приближении, работают по схожему сценарию:
+  1. Скачать необходимые пакеты
+  2. Установить пакеты 
+  3. Запустить приложение
 
+#### Разберем работу play на примере "Install Vector":
+Play "install Vector" состоит из 6 tasks и одного handlers:
+  - Get_vector_version            ***# Проверка версии vector с записью результата в переменную***
+    ```yml
+    - name: Get_vector_version
+      ansible.builtin.command: vector --version
+      register: is_installed
+      ignore_errors: True
+    ```
+  - Create a directory Vector     ***# Создание каталога для временных файлов***
+    ```yml
+    - name: Create a directory Vector
+      become: true
+      ansible.builtin.file: 
+        path: ./vector 
+        state: directory
+        owner: netology
+        group: netology
+        mode: 0755
+      when:
+        - is_installed is failed
+    # Как раз для этого сохранялся результат выполнения проверки версии vector. В случае, если на сервере vector уже установлен данный шаг будет пропущен.
+    ```
+  - Copy rpm file to server       ***# Скачивание rpm пакета на сервер***
+    ```yml
+    - name: Copy rpm file to server
+      ansible.builtin.get_url:
+        url: "{{vector_url}}"
+        dest: ./vector/vector-{{vector_version}}-1.x86_64.rpm
+        mode: 0700
+      when:
+        - is_installed is failed
+    ```
+  - Install package               ***# Установка vector на сервер***
+    ```yml
+    - name: Install package
+      become: true
+      ansible.builtin.yum:
+        disable_gpg_check: true
+        name: ./vector/vector-{{vector_version}}-1.x86_64.rpm
+        state: present
+      when:
+        - is_installed is failed
+    ```
+  - Create vector config          ***# Создание конфигурационного файла***
+    ```yml
+    - name: Create vector config
+      become: true
+      ansible.builtin.template:
+        src: vector.yml.j2
+        dest: "{{ vector_config_dir }}/vector.yml"
+        mode: "0644"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_gid }}"
+        validate: vector validate --no-environment --config-yaml %s
+    ```
+  - Create vector systemd unit    ***# Создание systemd unit файла*** 
+    ```yml
+    - name: Create vector systemd unit
+      become: true
+      ansible.builtin.template:
+        src: vector.service.j2
+        dest: /usr/lib/systemd/system/vector.service
+        mode: "0644"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_gid }}"
+        backup: true
+    ```
+  - Handler: Start Vector service
+    ```yml
+    - name: Start Vector service
+      become: true
+      ansible.builtin.service:
+        name: vector
+        state: restarted
+      when:
+        - is_installed is true
+    ```
+## Лог выполнения Playbook:
 ```yml
 [08-ansible-02-playbook]$ ansible-playbook -i inventory/prod.yml site.yml --diff -vv
 ansible-playbook [core 2.15.3]
