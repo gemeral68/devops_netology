@@ -1,0 +1,7 @@
+---
+clickhouse_version: "23.7.4.5"
+clickhouse_packages:
+  - clickhouse-client
+  - clickhouse-server
+  - clickhouse-common-static
+clickhouse_config_dir: /etc/clickhouse-server/config.d/clickhouse.xml
