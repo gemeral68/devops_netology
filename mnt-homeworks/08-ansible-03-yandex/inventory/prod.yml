@@ -2,15 +2,15 @@
 clickhouse:
   hosts:
     clickhouse-01:
-      ansible_host: 84.201.188.70
+      ansible_host: <ip-addr>
 vector:
   hosts:
     vector-01:
-      ansible_host: 84.201.188.106
+      ansible_host: <ip-addr>
 lighthouse:
   hosts:
     lighthouse-01:
-      ansible_host: 51.250.51.36
+      ansible_host: <ip-addr>
 all:
   vars:
     ansible_ssh_private_key_file: /home/bulat/.ssh/id_rsa
