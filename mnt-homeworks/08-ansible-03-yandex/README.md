@@ -199,3 +199,7 @@ clickhouse-01              : ok=5    changed=0    unreachable=0    failed=0    s
 lighthouse-01              : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 vector-01                  : ok=4    changed=1    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0  
 ```
+## Подключение к Lighthouse:
+![](https://github.com/gemeral68/devops_netology/blob/main/mnt-homeworks/08-ansible-03-yandex/Screenshot%20from%202023-08-24%2017-25-36.png)
+
+![](https://github.com/gemeral68/devops_netology/blob/main/mnt-homeworks/08-ansible-03-yandex/Screenshot%20from%202023-08-24%2017-25-59.png)
