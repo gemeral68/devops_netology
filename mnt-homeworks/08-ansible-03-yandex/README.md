@@ -1,3 +1,102 @@
+
+# Clickhouse & Vector & Lighthouse
+Полное описание работы было представлено в предыдущем домашнем задании. Здесь же добавился play  с разворачиванием lighthouse и nginx.
+Рассмотрим его работу:
+```yml
+- name: Install LightHouse
+  hosts: lighthouse
+  become: true
+  vars_files:
+    - ./group_vars/lighthouse/vars.yml
+  handlers:
+    - name: Start nginx
+      ansible.builtin.systemd:
+        name: nginx
+        state: restarted
+  tasks:
+    - name: Install Git
+      ansible.builtin.yum:
+        update_cache: yes
+        name: "{{ item }}"
+        state: present
+      with_items: 
+          - git
+          - epel-release
+          - nginx
+    - name: Clone lighthouse repo
+      ansible.builtin.git:
+        repo: "{{lighthouse_url}}"
+        dest: "{{lighthouse_dir}}"
+        version: master
+    - name: Create nginx conf
+      ansible.builtin.template:
+        src: nginx_lighthouse.conf.j2
+        dest: "{{nginx_conf_dir}}"
+        mode: "0644"
+        owner: root
+        group: root
+      notify: Start nginx
+```
+Общий принцип работы play заключается в том, чтобы склонировать репозиторий в каталог /usr/share/nginx/html/lighthouse и создать конфиг файл для nginx.
+group_vars/lighthouse:
+```yml
+---
+nginx_conf_dir: /etc/nginx/conf.d/nginx_lighthouse.conf
+lighthouse_url: https://github.com/VKCOM/lighthouse.git
+lighthouse_dir: /usr/share/nginx/html/lighthouse/
+```
+inventory:
+```yml
+---
+clickhouse:
+  hosts:
+    clickhouse-01:
+      ansible_host: <ip-addr>
+vector:
+  hosts:
+    vector-01:
+      ansible_host: <ip-addr>
+lighthouse:
+  hosts:
+    lighthouse-01:
+      ansible_host: <ip-addr>
+all:
+  vars:
+    ansible_ssh_private_key_file: /home/bulat/.ssh/id_rsa
+    ansible_sudo_pass: netology
+    ansible_user: netology
+```
+templates/clickhouse.conf.j2:
+```
+<clickhouse>
+  <listen_host>::</listen_host> 
+</clickhouse>
+```
+templates/nginx_lighthouse.conf.j2:
+```
+server {
+        listen       8080;
+        server_name  _;
+        root         /usr/share/nginx/html/lighthouse/;
+        index        index.html;
+
+        # Load configuration files for the default server block.
+
+        location / {
+
+        }
+
+        error_page 404 /404.html;
+            location = /40x.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+            location = /50x.html {
+        }
+}
+```
+
+## Лог выполнения Playbook:
 ```yml
 ansible-playbook -i inventory/prod.yml site.yml  --diff -vv
 ansible-playbook [core 2.15.3]
