@@ -1,6 +1,0 @@
----
-# handlers file for vector
-  - name: Start Vector service
-    ansible.builtin.systemd:
-      name: vector
-      state: restarted
