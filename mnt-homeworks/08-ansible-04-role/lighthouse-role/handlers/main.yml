@@ -1,0 +1,6 @@
+---
+# handlers file for lighthouse
+  - name: Start nginx
+    ansible.builtin.systemd:
+      name: nginx
+      state: restarted

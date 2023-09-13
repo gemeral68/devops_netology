@@ -1,0 +1,4 @@
+---
+# vars file for vector
+vector_version: 0.32.0
+endpoint: 51.250.54.194

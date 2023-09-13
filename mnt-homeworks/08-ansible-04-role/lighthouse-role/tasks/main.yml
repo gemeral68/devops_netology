@@ -1,0 +1,24 @@
+---
+# tasks file for lighthouse
+  - name: Install Git
+    ansible.builtin.yum:
+      update_cache: yes
+      name: "{{ item }}"
+      state: present
+    with_items: 
+        - git
+        - epel-release
+        - nginx
+  - name: Clone lighthouse repo
+    ansible.builtin.git:
+      repo: "{{lighthouse_url}}"
+      dest: "{{lighthouse_dir}}"
+      version: master
+  - name: Create nginx conf
+    ansible.builtin.template:
+      src: nginx_lighthouse.conf.j2
+      dest: "{{nginx_conf_dir}}"
+      mode: "0644"
+      owner: root
+      group: root
+    notify: Start nginx
