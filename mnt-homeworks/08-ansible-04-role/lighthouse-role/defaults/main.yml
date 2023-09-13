@@ -1,5 +1,0 @@
----
-# defaults file for lighthouse
-  nginx_conf_dir: /etc/nginx/conf.d/nginx_lighthouse.conf
-  lighthouse_url: https://github.com/VKCOM/lighthouse.git
-  lighthouse_dir: /usr/share/nginx/html/lighthouse/
