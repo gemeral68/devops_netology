@@ -120,6 +120,9 @@ ok: [localhost]
 PLAY RECAP *****************************************************************************************************************************************************************************************************************************************************************************************************************
 localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
+## Шаг 12
+Ansible Collection - my_own_namespace.yandex_cloud_elk
+https://github.com/gemeral68/my_own_collection/tree/main
 ## Шаг 15
 ```yml
 [root@localhost ansible_2]# ansible-galaxy collection install my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz
