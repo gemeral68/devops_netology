@@ -1,0 +1,9 @@
+---
+    - name: Test module
+      hosts: localhost
+      become: true
+      tasks:
+        - name: Create file    
+          my_own_module:
+            path: '/home/netology/ansible_module/ansible/'
+            content: 'test message'
