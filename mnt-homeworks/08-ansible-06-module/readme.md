@@ -120,3 +120,28 @@ ok: [localhost]
 PLAY RECAP *****************************************************************************************************************************************************************************************************************************************************************************************************************
 localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
+## Шаг 15
+```yml
+[root@localhost ansible_2]# ansible-galaxy collection install my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz
+Starting galaxy collection install process
+Process install dependency map
+Starting collection install process
+Installing 'my_own_namespace.yandex_cloud_elk:1.0.0' to '/root/.ansible/collections/ansible_collections/my_own_namespace/yandex_cloud_elk'
+my_own_namespace.yandex_cloud_elk:1.0.0 was installed successfully
+```
+## Шаг 16
+```yml
+[root@localhost ansible_2]# ansible-playbook playbook.yml
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+PLAY [Module role] *********************************************************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [my_own_namespace.yandex_cloud_elk.create_file : Create_file] *********************************************************************************************************************************************************************************************************************************************************
+changed: [localhost]
+
+PLAY RECAP *****************************************************************************************************************************************************************************************************************************************************************************************************************
+localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
