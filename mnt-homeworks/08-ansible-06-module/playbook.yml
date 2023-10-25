@@ -1,9 +1,0 @@
----
-- name: Module role
-  hosts: localhost
-  collections:
-    - my_own_collection.yandex_cloud_elk
-  tasks:
-    - name: Import createfile role
-      ansible.builtin.import_role:
-        name: create_file
