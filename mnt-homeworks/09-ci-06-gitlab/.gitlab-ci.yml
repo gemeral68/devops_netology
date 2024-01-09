@@ -1,0 +1,17 @@
+stages:
+    - build
+    
+variables:
+  VER_IMAGE: "10.116.100.32:5001/hello:gitlab-${CI_COMMIT_SHORT_SHA}"
+
+build_image:
+  stage: build  
+
+  only: 
+    - main
+  script:
+    - echo "Building the image..."
+    - docker build -t $VER_IMAGE .
+    - docker push $VER_IMAGE
+  tags:
+    - netology
