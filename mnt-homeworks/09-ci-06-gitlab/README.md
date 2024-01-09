@@ -121,3 +121,14 @@ df57e1a1cb1b   86c57940f54d              "/bin/sh -c 'python$…"   9 seconds ag
 curl localhost:5290/get_info
 {"version": 3, "method": "GET", "message": "Already started"}
 ```
+## Решённый Issue
+```
+docker run -d --name netology -p 5290:5290 ecd81a2b721b
+a032303b3cb34b3cb07b9476e9662bc9edc34f7cc06386f5111d0ff287ae79f4
+```
+```
+docker ps
+CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS                    PORTS                                                                                NAMES
+a032303b3cb3   ecd81a2b721b              "/bin/sh -c 'python$…"   8 minutes ago   Up 7 minutes              0.0.0.0:5290->5290/tcp, :::5290->5290/tcp                                            netology
+```
+<img src='https://github.com/gemeral68/devops_netology/blob/main/mnt-homeworks/09-ci-06-gitlab/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-01-09%20135958.png' hspace="5" alt="image" />
