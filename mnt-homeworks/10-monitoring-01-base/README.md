@@ -58,5 +58,7 @@
     Zabbix, VictoriaMetrics - гибридная модель, т.к. могут работать через агентов и самостоятельно опрашивать хосты 
 
 7) Запустил TICK-стэк согласно инструкции в репозитории:
-
-8) Последние версии telegraf уже преднастроены на работу с Docker, но к сожалдению нужные метрики так и не появились в панели Measurements and Tags. Прикладываю скрин графика нагрузки на прпоцессор:
+    ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/mnt-homeworks/10-monitoring-01-base/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-07-01%20124259.png)
+   
+8-9) Последние версии telegraf уже преднастроены на работу с Docker, но к сожалдению нужные метрики так и не появились в панели Measurements and Tags. Прикладываю скрин графика нагрузки на прпоцессор:
+    ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/mnt-homeworks/10-monitoring-01-base/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-07-01%20124748.png)
