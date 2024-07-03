@@ -23,14 +23,14 @@
 
 ### Задание 1
 Запущенные контейнеры спустя 5 минут:
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/mnt-homeworks/10-monitoring-04-elk/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-07-03%20125942.png)
 
-![Image alt]()
 Скрин интерфейса Kibana:
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/mnt-homeworks/10-monitoring-04-elk/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-07-03%20125725.png)
 
 ### Задание 2
 Индекс паттерн:
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/mnt-homeworks/10-monitoring-04-elk/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-07-03%20130134.png)
 
 Меню просмотра логов в Kibana:
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/mnt-homeworks/10-monitoring-04-elk/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-07-03%20130532.png)
