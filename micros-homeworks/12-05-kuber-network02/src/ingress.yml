@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingressroute
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`192.168.3.206`) && PathPrefix(`/api`)
+      kind: Rule
+      services:
+        - name: backend
+          port: 80
+    - match: Host(`192.168.3.206`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: frontend
+          port: 80
+
