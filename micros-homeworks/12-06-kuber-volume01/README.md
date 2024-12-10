@@ -14,4 +14,16 @@
 ### Решение
 
 #### Задание 1
-Создал и развернул [Deployment]() Зашел внутрь контейнера network-multitool, проверил что мне доступен файл test.txt и при его изменении он перезапишется первым контейнером busybox.
+Создал и развернул [Deployment](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-06-kuber-volume01/src/deployment.yml) 
+
+Зашел внутрь контейнера network-multitool, проверил что мне доступен файл test.txt и при его изменении он перезапишется первым контейнером busybox:
+
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-06-kuber-volume01/img/1.png)
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-06-kuber-volume01/img/2.png)
+
+#### Задание 2
+Создал и развернул [Daemonset](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-06-kuber-volume01/src/daemonset.yml). 
+
+Зашел внутрь контейнера network-multitool, убедился что в точке монтирования я могу читать файлы:
+
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-06-kuber-volume01/img/3.png)
