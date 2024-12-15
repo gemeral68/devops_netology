@@ -21,21 +21,21 @@
   2. Проблема была в том, что оба приложенгия патылись занять 80 порт.
 
 
-Создал и развернул [Deployment](), [CM WEBPORT](), [CM NGINX](), [SVC]():
+Создал и развернул [Deployment](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-08-kuber-config/src/deployment.yml), [CM WEBPORT](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-08-kuber-config/src/configmap_web.yml), [CM NGINX](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-08-kuber-config/src/configmap_nginx.yml), [SVC](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-08-kuber-config/src/svc_nginx.yml):
 
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-08-kuber-config/img/1.png)
 
 Проверил доступность сервиса:
 
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-08-kuber-config/img/2.png)
 
 #### Задание 2
-Создал и развернул [Deployment_NGINX]():
+Создал и развернул [Deployment_NGINX](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-08-kuber-config/src/deployment_nginx.yml):
 
 Создал сертификат: openssl req -x509 -newkey rsa:2048 -sha256 -nodes -keyout tls.key -out tls.crt -subj "/CN=test.com" -days 365
 
-Создал [Secret_TLS](), [INGRESS]():
+Создал [Secret_TLS](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-08-kuber-config/src/secret_tls.yml), [INGRESS](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-08-kuber-config/src/ingress.yml):
 
 Проверил доступность по HTTPS:
 
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-08-kuber-config/img/3.png)
