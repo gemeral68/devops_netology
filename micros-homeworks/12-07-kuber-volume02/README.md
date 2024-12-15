@@ -18,27 +18,27 @@
 ### Решение
 
 #### Задание 1
-Создал [Deployment](), [PV](), [PVC]():
+Создал [Deployment](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/src/deployment.yml), [PV](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/src/pv.yml), [PVC](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/src/pvc.yml):
 
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/img/1.png)
 
  Проверил доступность файла из контейнера multitool:
  
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/img/2.png)
 
  После удаления Deployment и PVC, PV перешел в статус "Released", это говорит о том, что том освобожден, но использовать его, пока в нем есть данные от другого pvc, нельзя:
 
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/img/3.png)
 
 После удаление PV файл сотался на диске. Это произошло из за того, что в режиме "retain", созданные файлы надо удалять вручную:
 
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/img/4.png)
 
 #### Задание 2
-Создал [Deployment]() и [PVC]():
+Создал [Deployment](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/src/nfs_deployment.yml) и [PVC](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/src/pvc_nfs.yml):
 
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/img/5.png)
 
 После деплоя успешно постучался через браузер:
 
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/img/6.png)
