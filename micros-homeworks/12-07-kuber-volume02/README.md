@@ -39,6 +39,6 @@
 
 ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/img/5.png)
 
-После деплоя успешно постучался через браузер:
+Скриншот изнутри пода с доступным примонтированным пространством:
 
 ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-07-kuber-volume02/img/6.png)
