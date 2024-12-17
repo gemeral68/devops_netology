@@ -18,6 +18,7 @@
 2. Создаю namespace и продолжаю установку приложения:
 
 ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-15_kuber-troubleshooting/img/2.png)
+
 ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/micros-homeworks/12-15_kuber-troubleshooting/img/3.png)
 
 3. Проверю статус deployments и pods:
