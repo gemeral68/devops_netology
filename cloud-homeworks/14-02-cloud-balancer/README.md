@@ -19,18 +19,18 @@
 
   1. Создал бакет и загрузил в него файл:
 
-  ![Image alt]()
+  ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-02-cloud-balancer/img/1.png)
 
   2. Развернул 3 ВМ через instance group:
 
-  ![Image alt]()
+  ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-02-cloud-balancer/img/2.png)
 
-  ![Image alt]()
+  ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-02-cloud-balancer/img/3.png)
 
   3. Подцепил к группе network balancer:
 
-  ![Image alt]()
+  ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-02-cloud-balancer/img/4.png)
 
   4. Создал Application Load Balancer и подцепил к созданной ранее IG:
 
-  ![Image alt]()
+  ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-02-cloud-balancer/img/5.png)
