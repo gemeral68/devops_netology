@@ -11,10 +11,10 @@
 
 ### Решение
 
-  1. Cоздал [бакет]() и зашифровал с помощью ключа содержимое:
+  1. Cоздал [бакет](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-03-cloud-security/src/bucket.tf) и зашифровал с помощью ключа содержимое:
 
-  ![Image alt]()
+  ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-03-cloud-security/img/1.png)
 
   2. Попробовал создать статичный сайт. По названию бакета яндекс сам выдал поддомен. Но так как нет своего домена, прикручивать сертификат не стал:
 
-  ![Image alt]()
+  ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-03-cloud-security/img/2.png)
