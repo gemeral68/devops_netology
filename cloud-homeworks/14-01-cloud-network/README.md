@@ -18,12 +18,12 @@
   1. Создал пустую VPC. (зону можно выбрать только при создании subnet)
   2. Cоздал subnet "public" и в нем две ВМ:
 
-    ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-01-cloud-network/img/1.png)
+  ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-01-cloud-network/img/1.png)
 
-    ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-01-cloud-network/img/2.png)
+  ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-01-cloud-network/img/2.png)
 
-    ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-01-cloud-network/img/3.png)
+  ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-01-cloud-network/img/3.png)
 
   3. Скрин до и после применения статического маршрута:
 
-    ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-01-cloud-network/img/4.png)
+  ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/cloud-homeworks/14-01-cloud-network/img/4.png)
