@@ -19,10 +19,4 @@
 
 Прикладываю скрин переписки с поддержкой:
 
-![Image alt]()
-
-### Доработка по первому вопросу.
-
-Прикладываю скрин переписки с поддержкой:
-
-![Image alt]()
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/netology-diplom/admission/img/2.png)
