@@ -82,6 +82,7 @@ kubectl -n monitoring delete networkpolicies.networking.k8s.io --all
 ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/netology-diplom/img/6.png)
 
 4. Задеплоил свое [приложение](http://89.169.144.118:30080/) и проверил доступность:
+   
 ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/netology-diplom/img/7.png)
 
 #### Установка и настройка CI/CD
