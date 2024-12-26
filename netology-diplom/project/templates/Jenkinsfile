@@ -1,0 +1,88 @@
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          nodeSelector: 
+            kubernetes.io/hostname: vm-worker-node-1
+          containers:
+          - name: docker
+            image: docker:latest
+            command:
+            - cat
+            tty: true
+            volumeMounts:
+             - mountPath: /var/run/docker.sock
+               name: docker-sock
+          - name: git
+            image: alpine/git
+            command:
+            - cat
+            tty: true
+          - name: kubectl
+            image: lachlanevenson/k8s-kubectl
+            command:
+            - cat
+            tty: true
+          volumes:
+          - name: docker-sock
+            hostPath:
+              path: /var/run/docker.sock    
+        '''
+    }
+  }
+  
+  environment { 
+      DOCKER_REGISTRY = 'cr.yandex/crprqj33u8jqj81ij89f' 
+      DOCKER_IMAGE = 'nginx-square' 
+      GIT_REPO = 'https://github.com/gemeral68/diplom.git'
+  }
+  
+  stages {
+    stage('Checkout Git Repo') {
+      steps {
+        container('git') {
+          sh 'git clone ${GIT_REPO} repo'
+        }
+      }
+    }
+    stage('Build Docker Image') {
+      steps {
+        container('docker') {
+          dir('repo') {
+            sh 'docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest .'
+          }
+        }
+      }
+    }
+    stage('Push Docker Image') {
+      steps {
+        container('docker') {
+          withCredentials([string(credentialsId: 'yandex-cloud-token', variable: 'YANDEX_CLOUD_TOKEN')]) {
+            sh 'echo $YANDEX_CLOUD_TOKEN | docker login -u oauth --password-stdin ${DOCKER_REGISTRY}'
+            sh 'docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest'
+          }
+        }
+      }
+    }
+    stage('Deploy to Kubernetes') {
+      steps {
+        container('kubectl') {
+          withKubeConfig([credentialsId: 'kubeconfig-credentials-id']) {
+            dir ('repo') {
+              sh 'kubectl apply -f deployment.yml'
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  post {
+    always {
+      cleanWs()
+    }
+  }
+}

@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-square
+  labels:
+    app: nginx-square
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-square
+  template:
+    metadata:
+      labels:
+        app: nginx-square
+    spec:
+      containers:
+      - name: nginx-square
+        image: cr.yandex/crprqj33u8jqj81ij89f/nginx-square:latest
+        ports:
+          - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-square
+spec:
+  type: NodePort
+  selector:
+    app: nginx-square
+  ports:
+    - name: nginx-square
+      port: 80
+      protocol: TCP
+      nodePort: 30080
