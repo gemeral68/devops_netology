@@ -85,4 +85,7 @@ kubectl -n monitoring delete networkpolicies.networking.k8s.io --all
 ![Image alt](https://github.com/gemeral68/devops_netology/blob/main/netology-diplom/img/7.png)
 
 #### Установка и настройка CI/CD
-В качестве CI/CD системы был выбран Jenkins. Мне показалось, что его проще развернуть в кластере k8s. Подготовил необходимые [манефесты]() согласно докуцментации 
+1. В качестве CI/CD системы был выбран Jenkins. Мне показалось, что его проще развернуть в кластере k8s. Подготовил необходимые [манефесты](https://github.com/gemeral68/devops_netology/tree/main/netology-diplom/project/templates/jenkins-kuber) согласно докуцментации.  
+2. Далее были настроены необходимые credentials для доступа в container registry и управлдения k8s(чтобы задеплоить приложение).
+3. Написал [Jenkinsfile](https://github.com/gemeral68/devops_netology/blob/main/netology-diplom/project/templates/Jenkinsfile), который создает динамический pod с несколькими контейнерами, каждый для своего stage, скачивает исходники с [github](https://github.com/gemeral68/diplom), на их основе собирает image и пушит его в container registry.
+![Image alt](https://github.com/gemeral68/devops_netology/blob/main/netology-diplom/img/8.png)
