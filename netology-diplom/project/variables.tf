@@ -44,6 +44,16 @@ variable "bucket_name" {
   description = "S3 bucket name"
 }
 
+variable "access_key" {
+  type = string
+  default = "<access_key>"
+}
+
+variable "secret_key" {
+  type = string
+  default = "<secret_key>"
+  
+}
 
 ### VPC variable
 variable "vpc_name" {
