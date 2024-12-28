@@ -1,4 +1,7 @@
 pipeline {
+  triggers {
+      githubPush()
+  }
   agent {
     kubernetes {
       yaml '''
@@ -33,7 +36,7 @@ pipeline {
         '''
     }
   }
-  
+ 
   environment { 
       DOCKER_REGISTRY = 'cr.yandex/crprqj33u8jqj81ij89f' 
       DOCKER_IMAGE = 'nginx-square' 
@@ -45,6 +48,10 @@ pipeline {
       steps {
         container('git') {
           sh 'git clone ${GIT_REPO} repo'
+          script { 
+              def tag = sh(script: "git -C repo describe --tags", returnStdout: true).trim() 
+              env.TAG_NAME = tag 
+          }
         }
       }
     }
@@ -52,7 +59,7 @@ pipeline {
       steps {
         container('docker') {
           dir('repo') {
-            sh 'docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest .'
+            sh 'docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${TAG_NAME} .'
           }
         }
       }
@@ -62,7 +69,7 @@ pipeline {
         container('docker') {
           withCredentials([string(credentialsId: 'yandex-cloud-token', variable: 'YANDEX_CLOUD_TOKEN')]) {
             sh 'echo $YANDEX_CLOUD_TOKEN | docker login -u oauth --password-stdin ${DOCKER_REGISTRY}'
-            sh 'docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest'
+            sh 'docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${TAG_NAME}'
           }
         }
       }
@@ -72,6 +79,7 @@ pipeline {
         container('kubectl') {
           withKubeConfig([credentialsId: 'kubeconfig-credentials-id']) {
             dir ('repo') {
+              sh 'kubectl set image deployment/nginx-square nginx-square=${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${TAG_NAME}'    
               sh 'kubectl apply -f deployment.yml'
             }
           }
